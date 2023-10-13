@@ -16,7 +16,7 @@ int main(int argc, char *argv[]) {
 
     int caracter;
     while ((caracter = fgetc(archivo)) != EOF) {
-        putchar(caracter); // Imprimir el carácter en la consola
+        putchar(caracter);
     }
 
     fclose(archivo);
