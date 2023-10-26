@@ -1,0 +1,26 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(int argc, char *argv[]){
+	FILE *Archivo;
+	char *NombreArchivo;
+	char ch;
+	
+	if(argc < 2){
+		printf("Missing Filename\n");
+		exit(1);
+	}
+	
+	NombreArchivo = argv[1];
+	printf("Filname: %s\n", NombreArchivo);
+	Archivo = fopen(NombreArchivo, "r");
+	if(Archivo == NULL){
+		printf("Fallo en abrir el archivo\n");
+		exit(2);
+	}
+	printf("File contents:\n");
+	while((ch = fgetc(Archivo)) != EOF){
+		printf("%c", ch);
+	}
+	exit(0);
+}

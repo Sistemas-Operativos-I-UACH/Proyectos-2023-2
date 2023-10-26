@@ -1,0 +1,19 @@
+#include <stdio.h>
+
+int main(int argc, char *argv[]){
+    char *archname, cadena[250];
+    FILE *arch;
+    
+    archname = argv[1];
+    arch = fopen(archname, "r");
+
+    if(arch == NULL){
+    	printf("Archivo inexsistente\n");
+        return 1;
+    }
+    
+	while(fgets(cadena, sizeof(cadena), arch) != NULL){
+		printf("%s", cadena);
+    }
+    return 0;
+}
