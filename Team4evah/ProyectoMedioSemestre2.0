@@ -1,0 +1,66 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <dirent.h>
+#include <string.h>
+
+int main() 
+{
+    DIR *dir = opendir("/proc");
+    if (dir == NULL) 
+    {
+        perror("Error abriendo /proc");
+        return 1;
+    }
+
+    struct dirent *entry;
+
+    while ((entry = readdir(dir)) != NULL) 
+    {
+        int pid = atoi(entry->d_name);
+        if (pid > 0) 
+        {
+            char status_path[256];
+            snprintf(status_path, sizeof(status_path), "/proc/%d/status", pid);
+
+            FILE *status_file = fopen(status_path, "r");
+            if (status_file != NULL) 
+            {
+                char line[256];
+                char name[256];
+                
+                while (fgets(line, sizeof(line), status_file) != NULL) 
+                {
+                    if (sscanf(line, "Name:\t%s", name) == 1) 
+                    {
+                        break;
+                    }
+                }
+
+                int is_kernel = strstr(line, "VmKernel") != NULL;
+
+                printf("ID del proceso: %d\n", pid);
+                printf("Nombre del proceso: %s\n", name);
+                printf("Tipo de proceso: %s\n", is_kernel ? "Kernel" : "Usuario");
+                printf("=============================\n");
+
+                fclose(status_file);
+            }
+        }
+    }
+
+    closedir(dir);
+
+    FILE *meminfo_file = fopen("/proc/meminfo", "r");
+    if (meminfo_file != NULL) 
+    {
+        char line[256];
+
+        while (fgets(line, sizeof(line), meminfo_file) != NULL) 
+        {
+            printf("%s", line);
+        }
+        fclose(meminfo_file);
+    }
+
+    return 0;
+}
