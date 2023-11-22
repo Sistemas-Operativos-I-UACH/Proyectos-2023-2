@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <dirent.h>
+#include <ctype.h>
+
 
 void mostrarMemTotal() {
     FILE *meminfo_file = fopen("/proc/meminfo", "r");
