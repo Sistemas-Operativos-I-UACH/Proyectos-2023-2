@@ -10,6 +10,28 @@
 #include <dirent.h>
 #include <string.h>
 
+long ObtenerMemoriaTotal() {
+    FILE *meminfo = fopen("/proc/meminfo", "r");
+    if (meminfo == NULL) {
+        fprintf(stderr, "No se pudo abrir /proc/meminfo\n");
+        return -1; 
+    }
+
+    char linea[100];
+    long memoria_total = -1;
+
+    while (fgets(linea, sizeof(linea), meminfo) != NULL) {
+        if (strncmp(linea, "MemTotal:", 9) == 0) {
+            sscanf(linea, "MemTotal: %ld", &memoria_total);
+            break;
+        }
+    }
+
+    fclose(meminfo);
+    return memoria_total;
+}
+
+
 int ObtenerNombrePrograma(const char *pid, char *nombre, size_t tamano) {
     char archivo[100];
     sprintf(archivo, "/proc/%s/cmdline", pid);
@@ -47,10 +69,13 @@ void ListarProcesos() {
     } else {
         fprintf(stderr, "No se pudo abrir el directorio /proc");
     }
+    long memoria_total = ObtenerMemoriaTotal();
+    if (memoria_total != -1) {
+        printf("\nMemoria Total: %ld kB\n", memoria_total);
+    }
 }
 
 int main() {
     ListarProcesos();
     return 0;
 }
- 
