@@ -3,8 +3,8 @@
 #include <linux/kernel.h>
 
 MODULE_LICENSE("GPL");
-MODULE_AUTHOR("Iván Chavero");
-MODULE_DESCRIPTION("Module for vacations!");
+MODULE_AUTHOR("Equipo FedoraLovers");
+MODULE_DESCRIPTION("Module anti-Microsoft!");
 MODULE_VERSION("0.01");
 
 
