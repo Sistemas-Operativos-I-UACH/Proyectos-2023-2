@@ -7,8 +7,8 @@ This is a test kernel module
 
 1. [Iván Chavero](https://github.com/imcsk8) *Master Jedi*
 2. [FedoraLovers](https://github.com/Sistemas-Operativos-I-UACH/Proyectos-2023-2/tree/main/EquipoFedoraLovers) *FedoraLovers Team*
-3. [nombre de equipo](https://github.com/Sistemas-Operativos-I-UACH/Proyectos-2023-2) *Padwan Team*
-
+3. [362989-360270](https://github.com/Sistemas-Operativos-I-UACH/Proyectos-2023-2/tree/main/362989-360270) *362989-360270*
+4. [nombre de equipo](https://github.com/Sistemas-Operativos-I-UACH/Proyectos-2023-2) *Padwan Team*
 # Module building
 
 ## Build dependencies
